@@ -1,0 +1,124 @@
+.Layout {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    align-content: start;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: clip;
+    color: var(--text);
+}
+
+.Layout > header,
+.Layout > nav,
+.Layout > main,
+.Layout > footer {
+    min-width: 0;
+}
+
+.Layout > header {
+    position: relative;
+    z-index: 20;
+    width: min(94vw, 96rem);
+    margin-inline: auto;
+    padding-top: clamp(0.5rem, 1.2vw, 0.85rem);
+}
+
+.Layout > nav {
+    position: sticky;
+    z-index: 30;
+    top: 0.45rem;
+    width: min(94vw, 96rem);
+    margin: clamp(0.65rem, 1.25vw, 1rem) auto 0;
+    padding-inline: clamp(0.25rem, 1vw, 0.65rem);
+}
+
+.Layout > main {
+    position: relative;
+    z-index: 2;
+    width: min(94vw, 96rem);
+    margin-inline: auto;
+    padding-block: clamp(1.6rem, 2.6vw, 2.75rem) 0;
+}
+
+.Layout > footer {
+    position: relative;
+    z-index: 3;
+    width: min(94vw, 96rem);
+    margin: clamp(2.5rem, 5vw, 4.75rem) auto 0;
+    padding-bottom: clamp(0.7rem, 2vw, 1.25rem);
+}
+
+/* Fine ribbon seams, not oversized decorative blobs. */
+.Layout::before,
+.Layout::after {
+    position: fixed;
+    z-index: 0;
+    content: "";
+    pointer-events: none;
+}
+
+.Layout::before {
+    top: 22%;
+    left: -3rem;
+    width: 11rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(243, 202, 120, 0.4), transparent);
+    box-shadow: 0 0 1.3rem rgba(243, 202, 120, 0.18);
+    rotate: -11deg;
+}
+
+.Layout::after {
+    right: -2rem;
+    bottom: 18%;
+    width: 9rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(239, 113, 149, 0.38), transparent);
+    box-shadow: 0 0 1.3rem rgba(239, 113, 149, 0.16);
+    rotate: 12deg;
+}
+
+@media (max-width: 42rem) {
+    .Layout > header,
+    .Layout > nav,
+    .Layout > main,
+    .Layout > footer {
+        width: min(94vw, 96rem);
+    }
+
+    .Layout > header {
+        padding-top: 0.35rem;
+    }
+
+    .Layout > nav {
+        top: 0.25rem;
+        margin-top: 0.55rem;
+        padding-inline: 0.18rem;
+    }
+
+    .Layout > main {
+        padding-block: 1rem 0;
+    }
+
+    .Layout > footer {
+        margin-top: 2rem;
+    }
+
+    .Layout::before,
+    .Layout::after {
+        display: none;
+    }
+}
+
+@media (forced-colors: active) {
+    .Layout {
+        color: CanvasText;
+        background: Canvas;
+    }
+
+    .Layout::before,
+    .Layout::after {
+        display: none;
+    }
+}

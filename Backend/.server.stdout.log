@@ -1,0 +1,11 @@
+Listening...
+[32mGET /api/audience | body: null[39m
+[31mUnknown database 'giftshop'[39m
+[32mGET /api/audience | body: null[39m
+[32mGET /api/gifts-by-audience/1 | body: null[39m
+[32mGET /api/audience | body: null[39m
+[32mGET /api/gifts-by-audience/1 | body: null[39m
+[32mGET /api/audience | body: null[39m
+[32mGET /api/gifts-by-audience/4 | body: null[39m
+[32mGET /api/audience | body: null[39m
+[32mGET /api/audience | body: null[39m

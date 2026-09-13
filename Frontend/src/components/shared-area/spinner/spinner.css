@@ -1,0 +1,152 @@
+.Spinner {
+    --spinner-panel-size: clamp(11.5rem, 29vw, 14rem);
+
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    min-width: 100vw;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 1.25rem;
+    overflow: hidden;
+    background:
+        radial-gradient(ellipse 25rem 17rem at 50% 48%, rgba(239, 113, 149, 0.13), transparent 72%),
+        rgba(16, 8, 13, 0.88);
+    -webkit-backdrop-filter: blur(28px) saturate(145%);
+    backdrop-filter: blur(28px) saturate(145%);
+}
+
+.Spinner::before {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    width: var(--spinner-panel-size);
+    aspect-ratio: 1;
+    border: 1px solid transparent;
+    border-radius: 2.35rem;
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.16), transparent 42%) padding-box,
+        linear-gradient(90deg, transparent 46%, rgba(243, 202, 120, 0.08) 46% 54%, transparent 54%) padding-box,
+        linear-gradient(118deg, rgba(61, 28, 49, 0.9), rgba(43, 19, 35, 0.8)) padding-box,
+        var(--glass-border-gradient) border-box;
+    box-shadow:
+        var(--glass-shadow-lg),
+        0 0 3.8rem rgba(239, 113, 149, 0.13);
+    content: "";
+    -webkit-backdrop-filter: var(--glass-filter);
+    backdrop-filter: var(--glass-filter);
+    transform: translate(-50%, -50%);
+    animation: joy-loader-float 3.8s ease-in-out infinite;
+}
+
+.Spinner::after {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: calc(var(--spinner-panel-size) + 0.85rem);
+    aspect-ratio: 1;
+    padding: 1.5px;
+    border-radius: 2.65rem;
+    background: conic-gradient(
+        from 0turn,
+        transparent 0 16%,
+        var(--gold) 23%,
+        transparent 31% 50%,
+        var(--rose) 60%,
+        transparent 69% 84%,
+        var(--coral) 92%,
+        transparent
+    );
+    box-shadow: 0 0 2rem rgba(239, 113, 149, 0.12);
+    content: "";
+    pointer-events: none;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: joy-loader-orbit 4.5s linear infinite;
+}
+
+.Spinner img {
+    position: relative;
+    z-index: 2;
+    width: clamp(8.2rem, 23vw, 10rem);
+    height: auto;
+    border-radius: var(--radius-lg);
+    mix-blend-mode: multiply;
+    filter:
+        saturate(1.55)
+        hue-rotate(300deg)
+        brightness(1.2)
+        drop-shadow(0 0 0.8rem rgba(239, 113, 149, 0.22));
+    transform: translateZ(0);
+}
+
+@keyframes joy-loader-float {
+    0%,
+    100% {
+        transform: translate(-50%, -50%) translateY(0) rotate(-0.4deg);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) translateY(-0.35rem) rotate(0.45deg);
+    }
+}
+
+@keyframes joy-loader-orbit {
+    from {
+        transform: translate(-50%, -50%) rotate(0turn);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(1turn);
+    }
+}
+
+@media (max-width: 30rem) {
+    .Spinner {
+        --spinner-panel-size: 11.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .Spinner::before,
+    .Spinner::after {
+        animation: none;
+    }
+}
+
+@media (forced-colors: active) {
+    .Spinner {
+        background: Canvas;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .Spinner::before {
+        border: 2px solid CanvasText;
+        background: Canvas;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .Spinner::after {
+        display: none;
+    }
+
+    .Spinner img {
+        mix-blend-mode: normal;
+        filter: none;
+        forced-color-adjust: none;
+    }
+}

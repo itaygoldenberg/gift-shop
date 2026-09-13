@@ -1,0 +1,101 @@
+name: giftshop
+
+# All images and containers:
+services:
+
+  # MySQL container:
+  mysql-service:
+
+    # MySQL image:
+    image: mysql:8
+
+    # Container name:
+    container_name: mysql-giftshop
+
+    # Restart policy:
+    restart: unless-stopped
+
+    # Volumes:
+    volumes:
+      - mysql-volume:/var/lib/mysql
+      - ./Database:/docker-entrypoint-initdb.d
+
+    # Environment variables needed by mysql image:
+    environment:
+ 
+      MYSQL_USER: itay
+      MYSQL_PASSWORD: Pa$$w0rd
+      MYSQL_DATABASE: giftshop
+      MYSQL_ROOT_PASSWORD: Pa$$w0rd
+
+# --------------------------------------------------------------
+
+  # Our backend service:
+  backend-service:
+
+    # Our image:
+    image: giftshop-backend
+
+    # Build the image from the following Dockerfile location:
+    build: ./Backend
+
+    # Our container:
+    container_name: giftshop-backend
+
+    # Port mapping:
+    ports:
+      - 4000:4000
+
+    # On crash - restart container:
+    restart: unless-stopped
+
+    # Volumes:
+    volumes:
+    
+      # read-only. It is excluded from the image by Backend/.dockerignore, so the
+      # secrets are never baked into the image itself.
+      - ./Backend/.env:/app/.env:ro
+
+    # Environment:
+    # These override the .env file: dotenv.config() does not overwrite variables
+    # that already exist in process.env, so whatever is set here wins.
+    environment:
+      MYSQL_HOST: mysql-service
+      MYSQL_USER: itay
+      MYSQL_PASSWORD: Pa$$w0rd
+      MYSQL_DATABASE: giftshop
+  
+# -----------------------------------------------------------------------------
+ 
+# Our frontend service:
+  frontend-service:
+
+    # Our image:
+    image: giftshop-frontend
+
+    # Build the image from the following Dockerfile location:
+    build: ./Frontend
+
+    # Our container:
+    container_name: giftshop-frontend
+
+    # Port mapping (Vite default port):
+    ports:
+      - 80:5173
+
+    # On crash - restart container:
+    restart: unless-stopped
+
+    # Wait for backend to run first:
+    depends_on:
+      - backend-service
+    
+    # Volumes:
+    volumes:
+    - ./Frontend/.env:/app/.env:ro
+
+# -----------------------------------------------------------------------------
+
+# List of all our named-volumes:
+volumes:
+  mysql-volume:

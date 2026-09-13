@@ -1,0 +1,142 @@
+.Copyrights {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    min-height: 4.6rem;
+    padding: 1rem clamp(1rem, 3vw, 2rem);
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: var(--radius-lg);
+    color: var(--muted);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.1), transparent 40%) padding-box,
+        linear-gradient(110deg, rgba(43, 20, 35, 0.82), rgba(58, 26, 46, 0.67), rgba(35, 16, 29, 0.84)) padding-box,
+        var(--glass-border-gradient) border-box;
+    box-shadow:
+        0 1rem 2.7rem rgba(4, 1, 3, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    -webkit-backdrop-filter: var(--glass-filter);
+    backdrop-filter: var(--glass-filter);
+}
+
+.Copyrights::before {
+    position: absolute;
+    inset: -120% auto -120% -18%;
+    width: 10%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent);
+    content: "";
+    opacity: 0.56;
+    pointer-events: none;
+    rotate: 17deg;
+    animation: joy-footer-glint 13s ease-in-out infinite;
+}
+
+.Copyrights::after {
+    position: absolute;
+    right: 1.2rem;
+    width: 2.3rem;
+    height: 1px;
+    background: linear-gradient(90deg, var(--rose), var(--gold), transparent);
+    box-shadow: 0 0 0.8rem rgba(239, 113, 149, 0.25);
+    content: "";
+    pointer-events: none;
+}
+
+.Copyrights p {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.65rem, 2vw, 1.2rem);
+    margin: 0;
+    color: var(--muted);
+    font-size: 0;
+    line-height: 1.35;
+    text-align: center;
+    text-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.38);
+}
+
+/* Replaces the malformed legacy copyright glyph visually, without touching TSX. */
+.Copyrights p::before {
+    color: var(--text);
+    content: "(c) 2026  JOY ATELIER";
+    font-size: clamp(0.68rem, 1.5vw, 0.78rem);
+    font-weight: 760;
+    letter-spacing: 0.12em;
+}
+
+.Copyrights p::after {
+    padding-left: clamp(0.65rem, 2vw, 1.2rem);
+    border-left: 1px solid rgba(243, 202, 120, 0.3);
+    color: var(--muted);
+    content: "Thoughtful gifts, lasting joy";
+    font-size: clamp(0.68rem, 1.5vw, 0.78rem);
+    font-weight: 560;
+    letter-spacing: 0.06em;
+}
+
+@keyframes joy-footer-glint {
+    0%,
+    22% {
+        transform: translateX(0);
+    }
+
+    55%,
+    100% {
+        transform: translateX(1180%);
+    }
+}
+
+@media (max-width: 34rem) {
+    .Copyrights {
+        min-height: 4.3rem;
+        padding-inline: 0.75rem;
+    }
+
+    .Copyrights::after {
+        display: none;
+    }
+
+    .Copyrights p {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .Copyrights p::after {
+        padding-top: 0.2rem;
+        padding-left: 0;
+        border-top: 1px solid rgba(243, 202, 120, 0.24);
+        border-left: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .Copyrights::before {
+        animation: none;
+    }
+}
+
+@media (forced-colors: active) {
+    .Copyrights {
+        border: 1px solid CanvasText;
+        color: CanvasText;
+        background: Canvas;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .Copyrights::before,
+    .Copyrights::after {
+        display: none;
+    }
+
+    .Copyrights p::before,
+    .Copyrights p::after {
+        border-color: CanvasText;
+        color: CanvasText;
+        text-shadow: none;
+    }
+}

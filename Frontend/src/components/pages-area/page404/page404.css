@@ -1,0 +1,197 @@
+.Page404 {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    width: min(calc(100% - 1rem), 54rem);
+    min-height: clamp(34rem, 65vh, 43rem);
+    margin: clamp(0.5rem, 2vw, 1.5rem) auto;
+    padding: clamp(17.5rem, 33vw, 20rem) clamp(1.4rem, 7vw, 4.5rem) clamp(2.5rem, 6vw, 4rem);
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: clamp(1.5rem, 3vw, 2.35rem);
+    color: var(--muted, #cfb9c1);
+    background:
+        radial-gradient(circle at 13% 13%, rgba(239, 113, 149, 0.13) 0 2px, transparent 3px) 0 0 / 3.3rem 3.3rem padding-box,
+        radial-gradient(circle at 87% 72%, rgba(243, 202, 120, 0.11) 0 2px, transparent 3px) 0 0 / 4.2rem 4.2rem padding-box,
+        radial-gradient(circle at 50% 3%, rgba(255, 152, 119, 0.13), transparent 34%) padding-box,
+        linear-gradient(145deg, rgba(255, 255, 255, 0.085), transparent 28%) padding-box,
+        linear-gradient(124deg, rgba(42, 21, 34, 0.88), rgba(55, 27, 45, 0.58) 58%, rgba(35, 17, 29, 0.84)) padding-box,
+        linear-gradient(132deg, rgba(255, 244, 235, 0.22), rgba(255, 244, 235, 0.055) 42%, rgba(243, 202, 120, 0.34), rgba(239, 113, 149, 0.26)) border-box;
+    box-shadow:
+        0 2.4rem 6rem rgba(5, 1, 4, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14),
+        inset 0 -1px 0 rgba(255, 244, 235, 0.035);
+    -webkit-backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    font-size: clamp(0.94rem, 1.4vw, 1.08rem);
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    line-height: 1.85;
+    text-align: center;
+    text-wrap: balance;
+    white-space: pre-line;
+    animation: page404-settle 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    transition:
+        border-color 180ms ease,
+        box-shadow 280ms ease,
+        transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.Page404::first-line {
+    color: var(--text, #fffaf5);
+    font-family: var(--font-display, Georgia, serif);
+    font-size: clamp(1.45rem, 3.2vw, 2.15rem);
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    line-height: 1.35;
+}
+
+.Page404::before {
+    position: absolute;
+    z-index: 2;
+    top: clamp(5rem, 9vw, 6.25rem);
+    left: 50%;
+    display: grid;
+    width: clamp(14.5rem, 35vw, 20rem);
+    height: clamp(8.5rem, 19vw, 11.25rem);
+    place-items: center;
+    border: 1px solid rgba(255, 244, 235, 0.2);
+    border-radius: 1.7rem;
+    color: var(--text, #fffaf5);
+    background:
+        linear-gradient(90deg, transparent 0 45.5%, rgba(243, 202, 120, 0.92) 45.5% 54.5%, transparent 54.5%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.19), transparent 30%),
+        linear-gradient(125deg, rgba(239, 113, 149, 0.88), rgba(255, 152, 119, 0.76) 52%, rgba(143, 196, 174, 0.62));
+    box-shadow:
+        0 1.8rem 3.5rem rgba(5, 1, 4, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.32),
+        inset 0 -1px 0 rgba(42, 17, 29, 0.18),
+        0 0 3rem rgba(239, 113, 149, 0.12);
+    content: "404";
+    font-family: var(--font-display, Georgia, serif);
+    font-size: clamp(4.5rem, 12vw, 7rem);
+    font-weight: 700;
+    letter-spacing: -0.06em;
+    line-height: 1;
+    text-shadow: 0 0.65rem 1.6rem rgba(42, 17, 29, 0.3);
+    transform: translateX(-50%) rotate(-1.5deg);
+    animation: page404-gift-float 6s ease-in-out infinite alternate;
+}
+
+.Page404::after {
+    position: absolute;
+    z-index: 3;
+    top: clamp(2.4rem, 5vw, 3.25rem);
+    left: 50%;
+    width: clamp(7rem, 16vw, 9rem);
+    height: clamp(4.5rem, 10vw, 5.8rem);
+    background:
+        radial-gradient(ellipse at 31% 68%, transparent 0 28%, rgba(243, 202, 120, 0.96) 30% 48%, transparent 50%),
+        radial-gradient(ellipse at 69% 68%, transparent 0 28%, rgba(239, 113, 149, 0.96) 30% 48%, transparent 50%),
+        radial-gradient(circle at 50% 69%, var(--coral, #ff9877) 0 13%, var(--gold, #f3ca78) 14% 23%, transparent 24%);
+    content: "";
+    filter: drop-shadow(0 0.8rem 1.1rem rgba(5, 1, 4, 0.28));
+    pointer-events: none;
+    transform: translateX(-50%) rotate(-2deg);
+    animation: page404-bow-float 6s ease-in-out -1s infinite alternate;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .Page404:hover {
+        border-color: rgba(243, 202, 120, 0.3);
+        box-shadow:
+            0 2.8rem 6.8rem rgba(5, 1, 4, 0.48),
+            0 0 3.5rem rgba(239, 113, 149, 0.075),
+            inset 0 1px 0 rgba(255, 255, 255, 0.17);
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes page404-settle {
+    from { transform: translateY(0.7rem) scale(0.994); }
+}
+
+@keyframes page404-gift-float {
+    from { transform: translateX(-50%) translateY(0) rotate(-1.5deg); }
+    to { transform: translateX(-50%) translateY(-0.42rem) rotate(1deg); }
+}
+
+@keyframes page404-bow-float {
+    from { transform: translateX(-50%) translateY(0) rotate(-2deg); }
+    to { transform: translateX(-50%) translateY(-0.3rem) rotate(2deg) scale(1.025); }
+}
+
+@media (max-width: 38rem) {
+    .Page404 {
+        width: 100%;
+        min-height: 33rem;
+        margin-block: 0.25rem;
+        padding: 14.8rem 1.15rem 2.25rem;
+        border-radius: 1.45rem;
+        font-size: 0.91rem;
+        line-height: 1.72;
+    }
+
+    .Page404::before {
+        top: 4.6rem;
+        width: 14rem;
+        height: 8.25rem;
+        border-radius: 1.35rem;
+        font-size: 4.25rem;
+    }
+
+    .Page404::after {
+        top: 2.15rem;
+        width: 6.8rem;
+        height: 4.3rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .Page404,
+    .Page404::before,
+    .Page404::after {
+        animation: none;
+        transition: none;
+    }
+
+    .Page404:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-contrast: more) {
+    .Page404,
+    .Page404::before {
+        border-color: rgba(255, 250, 245, 0.52);
+    }
+
+    .Page404 {
+        color: var(--text, #fffaf5);
+    }
+}
+
+@media (forced-colors: active) {
+    .Page404 {
+        border: 1px solid CanvasText;
+        color: CanvasText;
+        background: Canvas;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .Page404::before {
+        border: 2px solid CanvasText;
+        color: CanvasText;
+        background: Canvas;
+        box-shadow: none;
+        text-shadow: none;
+    }
+
+    .Page404::after {
+        display: none;
+    }
+}

@@ -1,0 +1,466 @@
+.Home {
+    --home-pad: clamp(2.25rem, 4.6vw, 4.75rem);
+    --home-bg: var(--bg, #10080d);
+    --home-surface: var(--surface, #2a1522);
+    --home-text: var(--text, #fffaf5);
+    --home-muted: var(--muted, #cfb9c1);
+    --home-gold: var(--gold, var(--accent, #f3ca78));
+    --home-rose: var(--rose, var(--accent-2, #ef7195));
+    --home-coral: var(--coral, #ff9877);
+    --home-sage: var(--sage, #8fc4ae);
+
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 0.86fr) minmax(25rem, 1.14fr);
+    grid-template-rows: minmax(12rem, auto) auto;
+    gap: clamp(2rem, 4.8vw, 5rem);
+    align-items: center;
+    width: min(100%, 82rem);
+    min-height: clamp(34rem, 66vh, 46rem);
+    margin-inline: auto;
+    padding: var(--home-pad);
+    overflow: hidden;
+    border: 1px solid var(--glass-border, rgba(255, 244, 235, 0.14));
+    border-radius: clamp(1.75rem, 3vw, 2.75rem);
+    color: var(--home-text);
+    background:
+        radial-gradient(circle at 9% 13%, rgba(239, 113, 149, 0.2), transparent 20rem),
+        radial-gradient(circle at 91% 88%, rgba(143, 196, 174, 0.12), transparent 23rem),
+        radial-gradient(circle at 51% 108%, rgba(243, 202, 120, 0.13), transparent 25rem),
+        linear-gradient(118deg, transparent 0 46%, rgba(243, 202, 120, 0.075) 46.15% 46.35%, transparent 46.5% 100%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.095), rgba(255, 255, 255, 0.025) 34%, rgba(16, 8, 13, 0.28)),
+        var(--glass, rgba(55, 27, 45, 0.58));
+    background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0;
+    box-shadow:
+        0 2.5rem 6rem rgba(0, 0, 0, 0.42),
+        0 0 0 0.45rem rgba(255, 255, 255, 0.018),
+        inset 0 1px 0 rgba(255, 255, 255, 0.17),
+        inset 0 -1px 0 rgba(243, 202, 120, 0.07);
+    -webkit-backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    animation: home-glass-breathe 14s ease-in-out infinite alternate;
+}
+
+/* The headline is part of the composition without changing the page markup. */
+.Home::before {
+    z-index: 2;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+    max-width: 9.5ch;
+    margin-top: 3.2rem;
+    content: "Make every moment\A feel like a gift.";
+    color: var(--home-text);
+    background:
+        linear-gradient(
+            108deg,
+            var(--home-text) 0%,
+            #fff2e0 24%,
+            var(--home-gold) 47%,
+            var(--home-rose) 69%,
+            var(--home-text) 96%
+        );
+    background-size: 210% auto;
+    background-position: 0% center;
+    background-clip: text;
+    font-family: var(--font-display, Georgia, serif);
+    font-size: clamp(3.35rem, 5.7vw, 6rem);
+    font-weight: 650;
+    letter-spacing: -0.057em;
+    line-height: 0.94;
+    white-space: pre-line;
+    text-wrap: balance;
+    text-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.36);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation:
+        home-title-arrive 760ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)) both,
+        home-title-sheen 9s ease-in-out 1.2s infinite;
+}
+
+/* A compact ribbon seal gives the hero a gift-boutique signature. */
+.Home::after {
+    position: absolute;
+    z-index: 3;
+    top: var(--home-pad);
+    left: var(--home-pad);
+    display: inline-flex;
+    align-items: center;
+    min-height: 2rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid rgba(243, 202, 120, 0.28);
+    border-radius: 999px;
+    content: "\2726   WRAPPED WITH JOY   \2726";
+    color: var(--home-gold);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 48%),
+        rgba(35, 17, 29, 0.67);
+    box-shadow:
+        0 0.75rem 2rem rgba(0, 0, 0, 0.25),
+        0 0 1.6rem rgba(239, 113, 149, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    -webkit-backdrop-filter: blur(16px) saturate(145%);
+    backdrop-filter: blur(16px) saturate(145%);
+    font-size: 0.68rem;
+    font-weight: 760;
+    letter-spacing: 0.16em;
+    line-height: 1;
+    white-space: nowrap;
+    pointer-events: none;
+    animation: home-ribbon-glow 4.8s ease-in-out infinite;
+}
+
+.Home img {
+    position: relative;
+    z-index: 1;
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: stretch;
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: clamp(29rem, 48vw, 39rem);
+    overflow: hidden;
+    border: 1px solid rgba(255, 244, 235, 0.22);
+    border-radius: clamp(1.35rem, 2.3vw, 2rem);
+    outline: 1px solid rgba(243, 202, 120, 0.19);
+    outline-offset: -0.55rem;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1;
+    visibility: visible;
+    clip-path: none;
+    filter: brightness(1) saturate(1.08) contrast(1.025);
+    box-shadow:
+        0 2rem 4.8rem rgba(0, 0, 0, 0.4),
+        0 0 2.8rem rgba(239, 113, 149, 0.09),
+        0 0 0 0.45rem rgba(255, 255, 255, 0.025);
+    transform: translateZ(0);
+    animation: none;
+    transition:
+        transform 620ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+        filter 420ms ease,
+        border-color 320ms ease,
+        box-shadow 420ms ease;
+}
+
+.Home p {
+    position: relative;
+    z-index: 2;
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+    margin: 0;
+    padding: clamp(1.35rem, 2.2vw, 1.8rem);
+    overflow: hidden;
+    border: 1px solid var(--glass-border-hot, rgba(243, 202, 120, 0.34));
+    border-radius: clamp(1.15rem, 2vw, 1.55rem);
+    color: var(--home-muted);
+    background:
+        radial-gradient(circle at 5% 0%, rgba(239, 113, 149, 0.13), transparent 12rem),
+        linear-gradient(138deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035) 44%, rgba(16, 8, 13, 0.08)),
+        var(--glass-strong, rgba(35, 17, 29, 0.84));
+    box-shadow:
+        0 1.5rem 3.7rem rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(239, 113, 149, 0.08);
+    -webkit-backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    font-size: clamp(0.96rem, 0.35vw + 0.88rem, 1.07rem);
+    font-weight: 450;
+    letter-spacing: 0.006em;
+    line-height: 1.76;
+    text-wrap: pretty;
+    transition:
+        transform 420ms var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+        border-color 260ms ease,
+        box-shadow 360ms ease;
+}
+
+/* The short line reads as a loose gift ribbon with a bright knot. */
+.Home p::before {
+    display: block;
+    width: 5.25rem;
+    height: 0.42rem;
+    margin-bottom: 1.1rem;
+    border-radius: 999px;
+    content: "";
+    background:
+        radial-gradient(circle at 51% 50%, #fff9ef 0 8%, var(--home-gold) 9% 24%, transparent 26%),
+        linear-gradient(90deg, transparent, var(--home-rose) 16%, var(--home-gold) 48% 54%, var(--home-coral) 84%, transparent);
+    box-shadow: 0 0 1.1rem rgba(243, 202, 120, 0.28);
+}
+
+.Home p::after {
+    position: absolute;
+    top: -80%;
+    bottom: -80%;
+    left: -32%;
+    width: 14%;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    pointer-events: none;
+    transform: rotate(17deg) translateX(-240%);
+    animation: home-card-sheen 8.5s ease-in-out 1.6s infinite;
+}
+
+.Home:focus-within {
+    border-color: rgba(243, 202, 120, 0.44);
+    box-shadow:
+        0 0 0 0.2rem rgba(243, 202, 120, 0.12),
+        0 2.5rem 6rem rgba(0, 0, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.17);
+}
+
+.Home img:focus-visible,
+.Home p:focus-visible {
+    outline: 2px solid var(--home-gold);
+    outline-offset: 0.3rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .Home img:hover {
+        border-color: rgba(243, 202, 120, 0.38);
+        filter: brightness(1.045) saturate(1.13) contrast(1.02);
+        box-shadow:
+            0 2.5rem 5.7rem rgba(0, 0, 0, 0.46),
+            0 0 3.3rem rgba(239, 113, 149, 0.13),
+            0 0 0 0.45rem rgba(255, 255, 255, 0.035);
+        transform: translateY(-0.3rem) scale(1.008);
+    }
+
+    .Home p:hover {
+        border-color: rgba(243, 202, 120, 0.46);
+        box-shadow:
+            0 1.9rem 4.5rem rgba(0, 0, 0, 0.36),
+            0 0 2rem rgba(239, 113, 149, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        transform: translateY(-0.22rem);
+    }
+}
+
+@keyframes home-glass-breathe {
+    from {
+        background-position: 0 0, 0 0, 0 0, -0.35rem 0, 0 0, 0 0;
+        box-shadow:
+            0 2.5rem 6rem rgba(0, 0, 0, 0.42),
+            0 0 0 0.45rem rgba(255, 255, 255, 0.018),
+            inset 0 1px 0 rgba(255, 255, 255, 0.17),
+            inset 0 -1px 0 rgba(243, 202, 120, 0.07);
+    }
+
+    to {
+        background-position: 0.8rem 0.4rem, -0.7rem -0.4rem, 0 -0.4rem, 0.45rem 0, 0 0, 0 0;
+        box-shadow:
+            0 2.7rem 6.6rem rgba(0, 0, 0, 0.46),
+            0 0 2.6rem rgba(239, 113, 149, 0.055),
+            inset 0 1px 0 rgba(255, 255, 255, 0.18),
+            inset 0 -1px 0 rgba(243, 202, 120, 0.1);
+    }
+}
+
+@keyframes home-title-arrive {
+    from {
+        transform: translateY(1.1rem);
+    }
+}
+
+@keyframes home-title-sheen {
+    0%,
+    18% {
+        background-position: 0% center;
+    }
+
+    54%,
+    100% {
+        background-position: 100% center;
+    }
+}
+
+@keyframes home-ribbon-glow {
+    0%,
+    100% {
+        border-color: rgba(243, 202, 120, 0.25);
+        box-shadow:
+            0 0.75rem 2rem rgba(0, 0, 0, 0.25),
+            0 0 1.2rem rgba(239, 113, 149, 0.06),
+            inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    }
+
+    50% {
+        border-color: rgba(243, 202, 120, 0.43);
+        box-shadow:
+            0 0.75rem 2rem rgba(0, 0, 0, 0.25),
+            0 0 1.7rem rgba(239, 113, 149, 0.13),
+            inset 0 1px 0 rgba(255, 255, 255, 0.17);
+    }
+}
+
+@keyframes home-card-sheen {
+    0%,
+    70% {
+        opacity: 0;
+        transform: rotate(17deg) translateX(-240%);
+    }
+
+    77% {
+        opacity: 0.7;
+    }
+
+    92%,
+    100% {
+        opacity: 0;
+        transform: rotate(17deg) translateX(1000%);
+    }
+}
+
+@media (max-width: 64rem) {
+    .Home {
+        --home-pad: clamp(1.75rem, 5vw, 3.25rem);
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        gap: clamp(1.35rem, 3vw, 2rem);
+        min-height: 0;
+    }
+
+    .Home::before {
+        grid-column: 1;
+        grid-row: 1;
+        max-width: 11ch;
+        margin-top: 3.4rem;
+        font-size: clamp(3.3rem, 9vw, 5.7rem);
+    }
+
+    .Home img {
+        grid-column: 1;
+        grid-row: 2;
+        width: 100%;
+        height: clamp(22rem, 58vw, 34rem);
+        min-height: 0;
+        object-position: center 45%;
+    }
+
+    .Home p {
+        grid-column: 1;
+        grid-row: 3;
+        width: 100%;
+    }
+}
+
+@media (max-width: 40rem) {
+    .Home {
+        --home-pad: 1rem;
+        gap: 1rem;
+        border-radius: 1.55rem;
+    }
+
+    .Home::before {
+        margin-top: 3.55rem;
+        font-size: clamp(2.7rem, 13vw, 4.1rem);
+        line-height: 0.97;
+    }
+
+    .Home::after {
+        min-height: 1.85rem;
+        padding: 0.4rem 0.68rem;
+        font-size: 0.6rem;
+        letter-spacing: 0.13em;
+    }
+
+    .Home img {
+        height: clamp(18rem, 70vw, 25rem);
+        border-radius: 1.2rem;
+        outline-offset: -0.38rem;
+        object-position: 55% center;
+    }
+
+    .Home p {
+        padding: 1.2rem;
+        border-radius: 1.15rem;
+        font-size: 0.94rem;
+        line-height: 1.68;
+    }
+
+    .Home p::before {
+        margin-bottom: 0.9rem;
+    }
+}
+
+@media (prefers-contrast: more) {
+    .Home,
+    .Home img,
+    .Home p {
+        border-width: 2px;
+    }
+
+    .Home p {
+        color: var(--home-text);
+        background: var(--home-bg);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .Home,
+    .Home::before,
+    .Home::after,
+    .Home img,
+    .Home p,
+    .Home p::after {
+        animation: none;
+        transition: none;
+    }
+
+    .Home img:hover,
+    .Home p:hover {
+        transform: none;
+    }
+}
+
+@media (forced-colors: active) {
+    .Home {
+        border: 1px solid CanvasText;
+        color: CanvasText;
+        background: Canvas;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .Home::before {
+        color: CanvasText;
+        background: none;
+        text-shadow: none;
+        -webkit-text-fill-color: CanvasText;
+    }
+
+    .Home::after {
+        border-color: Highlight;
+        color: HighlightText;
+        background: Highlight;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .Home img,
+    .Home p {
+        border: 1px solid CanvasText;
+        color: CanvasText;
+        background: Canvas;
+        box-shadow: none;
+        filter: none;
+        outline-color: CanvasText;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .Home p::before {
+        background: Highlight;
+        box-shadow: none;
+    }
+
+    .Home p::after {
+        display: none;
+    }
+}

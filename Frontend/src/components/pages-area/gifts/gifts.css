@@ -1,0 +1,552 @@
+.Gifts {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: minmax(0, 1.65fr) minmax(18rem, 0.72fr);
+    column-gap: clamp(2.25rem, 5vw, 5.5rem);
+    row-gap: clamp(2rem, 3vw, 3.25rem);
+    width: 100%;
+    min-height: 0;
+    margin-inline: auto;
+    padding: clamp(2rem, 4vw, 4.25rem);
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: clamp(1.5rem, 3vw, 2.4rem);
+    color: var(--text, #fffaf5);
+    background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.085), transparent 27%, rgba(239, 113, 149, 0.025) 70%) padding-box,
+        linear-gradient(122deg, rgba(42, 21, 34, 0.84), rgba(55, 27, 45, 0.58) 54%, rgba(35, 17, 29, 0.84)) padding-box,
+        linear-gradient(132deg, rgba(255, 244, 235, 0.22), rgba(255, 244, 235, 0.055) 42%, rgba(243, 202, 120, 0.34), rgba(239, 113, 149, 0.24)) border-box;
+    box-shadow:
+        0 2.2rem 5.5rem rgba(5, 1, 4, 0.36),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        inset 0 -1px 0 rgba(255, 244, 235, 0.035);
+    -webkit-backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    animation: gifts-settle 680ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.Gifts::before {
+    position: relative;
+    z-index: 2;
+    display: block;
+    grid-column: 1;
+    align-self: center;
+    max-width: 48rem;
+    margin: 0;
+    padding-inline-start: clamp(1rem, 2vw, 1.5rem);
+    border-inline-start: 3px solid var(--gold, #f3ca78);
+    color: var(--text, #fffaf5);
+    content: "The Gift Concierge\A Thoughtful gifts for every celebration.";
+    font-family: var(--font-display, Georgia, serif);
+    font-size: clamp(2rem, 2.55vw, 3.15rem);
+    font-weight: 650;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    text-shadow: 0 0.8rem 2rem rgba(5, 1, 4, 0.35);
+    white-space: pre-line;
+}
+
+.Gifts::first-line {
+    color: var(--text, #fffaf5);
+}
+
+.Gifts::after {
+    position: absolute;
+    z-index: -1;
+    top: -4.5rem;
+    right: -2.75rem;
+    display: grid;
+    width: clamp(10rem, 20vw, 15rem);
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid rgba(255, 244, 235, 0.14);
+    border-radius: 50%;
+    color: rgba(255, 250, 245, 0.78);
+    background:
+        radial-gradient(circle at 34% 26%, rgba(255, 255, 255, 0.22) 0 3%, transparent 14%),
+        radial-gradient(circle at 51% 54%, rgba(239, 113, 149, 0.2), transparent 35%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 152, 119, 0.045));
+    box-shadow:
+        inset 1rem 1rem 2.5rem rgba(255, 255, 255, 0.045),
+        inset -1rem -1rem 3rem rgba(16, 8, 13, 0.22),
+        0 0 3.5rem rgba(239, 113, 149, 0.09);
+    content: "✦";
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    pointer-events: none;
+    transform: rotate(8deg);
+    animation: gifts-seal-float 8s ease-in-out infinite alternate;
+}
+
+.Gifts select {
+    position: relative;
+    z-index: 2;
+    grid-column: 2;
+    align-self: center;
+    width: 100%;
+    min-height: 4rem;
+    margin: 0;
+    padding: 1rem 3.5rem 1rem 1.35rem;
+    appearance: none;
+    border: 1px solid var(--glass-border-hot, rgba(243, 202, 120, 0.34));
+    border-radius: 1.15rem;
+    outline: none;
+    color: var(--text, #fffaf5);
+    background:
+        linear-gradient(45deg, transparent 50%, var(--gold, #f3ca78) 51%) calc(100% - 1.45rem) 50% / 0.44rem 0.44rem no-repeat,
+        linear-gradient(135deg, var(--gold, #f3ca78) 49%, transparent 50%) calc(100% - 1.16rem) 50% / 0.44rem 0.44rem no-repeat,
+        linear-gradient(142deg, rgba(255, 255, 255, 0.13), transparent 42%),
+        var(--glass-strong, rgba(35, 17, 29, 0.84));
+    box-shadow:
+        0 1rem 2.6rem rgba(5, 1, 4, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 0 0 0.22rem rgba(243, 202, 120, 0.035);
+    -webkit-backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    font-size: 0.93rem;
+    font-weight: 740;
+    letter-spacing: 0.035em;
+    cursor: pointer;
+    transition:
+        border-color 180ms ease,
+        box-shadow 280ms ease,
+        transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .Gifts select:hover {
+        border-color: var(--rose, #ef7195);
+        box-shadow:
+            0 1.3rem 3rem rgba(5, 1, 4, 0.36),
+            0 0 0 0.22rem rgba(239, 113, 149, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.19);
+        transform: translateY(-2px);
+    }
+}
+
+.Gifts select:focus-visible {
+    border-color: var(--gold, #f3ca78);
+    box-shadow:
+        0 0 0 0.23rem rgba(243, 202, 120, 0.18),
+        0 1.1rem 2.8rem rgba(5, 1, 4, 0.34);
+}
+
+.Gifts select option {
+    color: var(--text, #fffaf5);
+    background: var(--surface, #2a1522);
+}
+
+.Gifts table {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-column: 1 / -1;
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--glass-border, rgba(255, 244, 235, 0.14));
+    border-radius: clamp(1.25rem, 2vw, 1.75rem);
+    border-spacing: 0;
+    color: var(--text, #fffaf5);
+    background:
+        radial-gradient(circle at 8% 0%, rgba(239, 113, 149, 0.1), transparent 29%),
+        radial-gradient(circle at 100% 100%, rgba(143, 196, 174, 0.07), transparent 32%),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.07), transparent 30%),
+        var(--glass, rgba(55, 27, 45, 0.58));
+    box-shadow:
+        0 1.8rem 4.5rem rgba(5, 1, 4, 0.36),
+        inset 0 1px 0 rgba(255, 255, 255, 0.13),
+        inset 0 -1px 0 rgba(255, 244, 235, 0.03);
+    -webkit-backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    table-layout: fixed;
+}
+
+.Gifts thead,
+.Gifts tbody {
+    display: grid;
+    min-width: 0;
+}
+
+.Gifts thead tr,
+.Gifts tbody tr {
+    display: grid;
+    grid-template-columns: minmax(11rem, 1.05fr) minmax(20rem, 2.35fr) minmax(7rem, 0.58fr) minmax(7rem, 0.62fr);
+    min-width: 0;
+}
+
+.Gifts th,
+.Gifts td {
+    min-width: 0;
+    padding: clamp(1.1rem, 1.65vw, 1.5rem) clamp(1rem, 1.75vw, 1.75rem);
+    border: 0;
+    text-align: start;
+    vertical-align: middle;
+}
+
+.Gifts th {
+    position: relative;
+    border-bottom: 1px solid rgba(255, 244, 235, 0.13);
+    color: var(--text, #fffaf5);
+    background:
+        linear-gradient(112deg, rgba(243, 202, 120, 0.13), rgba(239, 113, 149, 0.1) 52%, rgba(255, 152, 119, 0.08)),
+        rgba(35, 17, 29, 0.78);
+    font-size: 0.69rem;
+    font-weight: 860;
+    letter-spacing: 0.155em;
+    line-height: 1.25;
+    text-transform: uppercase;
+}
+
+.Gifts th:not(:last-child)::after {
+    position: absolute;
+    top: 25%;
+    right: 0;
+    bottom: 25%;
+    width: 1px;
+    background: linear-gradient(transparent, rgba(243, 202, 120, 0.3), transparent);
+    content: "";
+}
+
+.Gifts td {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 244, 235, 0.075);
+    color: var(--muted, #cfb9c1);
+    font-size: 0.94rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+    transition:
+        color 180ms ease,
+        background-color 180ms ease;
+}
+
+.Gifts td:first-child {
+    color: var(--text, #fffaf5);
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 1.06rem;
+    font-weight: 650;
+}
+
+.Gifts td:nth-child(3) {
+    color: var(--gold, #f3ca78);
+    font-variant-numeric: tabular-nums;
+    font-weight: 780;
+}
+
+.Gifts td:nth-child(4) {
+    color: var(--sage, #8fc4ae);
+    font-variant-numeric: tabular-nums;
+    font-weight: 780;
+}
+
+.Gifts tbody tr {
+    position: relative;
+    background: rgba(255, 255, 255, 0.012);
+    transition:
+        background-color 180ms ease,
+        box-shadow 260ms ease,
+        transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.Gifts tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.026);
+}
+
+.Gifts tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .Gifts tbody tr:hover {
+        z-index: 2;
+        background: linear-gradient(90deg, rgba(239, 113, 149, 0.105), rgba(243, 202, 120, 0.055));
+        box-shadow:
+            inset 3px 0 0 var(--rose, #ef7195),
+            0 0.8rem 2rem rgba(5, 1, 4, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .Gifts tbody tr:hover td {
+        color: var(--text, #fffaf5);
+    }
+
+    .Gifts tbody tr:hover td:nth-child(3) {
+        color: var(--gold, #f3ca78);
+    }
+
+    .Gifts tbody tr:hover td:nth-child(4) {
+        color: var(--sage, #8fc4ae);
+    }
+}
+
+.Gifts tbody:empty {
+    display: grid;
+    min-height: clamp(15rem, 28vh, 20rem);
+    place-items: center;
+}
+
+.Gifts tbody:empty::before {
+    width: min(calc(100% - 2rem), 38rem);
+    padding: 8.8rem 1.25rem 2rem;
+    color: var(--muted, #cfb9c1);
+    background:
+        linear-gradient(90deg, transparent 0 43%, var(--gold, #f3ca78) 43% 57%, transparent 57%) 50% 4.55rem / 5.8rem 3.3rem no-repeat,
+        linear-gradient(90deg, var(--rose, #ef7195), var(--coral, #ff9877)) 50% 4.55rem / 5.8rem 3.3rem no-repeat,
+        linear-gradient(90deg, transparent 0 43%, var(--gold, #f3ca78) 43% 57%, transparent 57%) 50% 3.55rem / 6.5rem 1.15rem no-repeat,
+        linear-gradient(90deg, var(--coral, #ff9877), var(--rose, #ef7195)) 50% 3.55rem / 6.5rem 1.15rem no-repeat,
+        radial-gradient(ellipse at 40% 68%, transparent 0 30%, rgba(243, 202, 120, 0.94) 32% 45%, transparent 47%) 50% 1.65rem / 4.6rem 2.8rem no-repeat,
+        radial-gradient(ellipse at 60% 68%, transparent 0 30%, rgba(239, 113, 149, 0.94) 32% 45%, transparent 47%) 50% 1.65rem / 4.6rem 2.8rem no-repeat;
+    content: "A CURATED SURPRISE AWAITS\A Choose an audience above to unwrap their perfect collection.";
+    font-size: 0.86rem;
+    font-weight: 680;
+    letter-spacing: 0.105em;
+    line-height: 1.8;
+    text-align: center;
+    white-space: pre-line;
+}
+
+@keyframes gifts-settle {
+    from {
+        transform: translateY(0.65rem) scale(0.995);
+    }
+}
+
+@keyframes gifts-seal-float {
+    from {
+        transform: translate3d(0, 0, 0) rotate(8deg);
+    }
+
+    to {
+        transform: translate3d(-0.8rem, 0.65rem, 0) rotate(13deg) scale(1.035);
+    }
+}
+
+@media (max-width: 64rem) {
+    .Gifts {
+        grid-template-columns: minmax(0, 1.35fr) minmax(15rem, 0.7fr);
+        column-gap: 2rem;
+        padding: clamp(1.75rem, 3.5vw, 2.5rem);
+    }
+
+    .Gifts::before {
+        font-size: clamp(1.85rem, 4.5vw, 2.8rem);
+    }
+
+    .Gifts thead tr,
+    .Gifts tbody tr {
+        grid-template-columns: minmax(8rem, 0.95fr) minmax(12rem, 2fr) minmax(6.25rem, 0.58fr) minmax(6.25rem, 0.62fr);
+    }
+}
+
+@media (min-width: 48.0625rem) and (max-height: 45rem) {
+    .Gifts {
+        row-gap: 1.5rem;
+        padding-block: 1.6rem;
+    }
+
+    .Gifts::before {
+        font-size: clamp(1.8rem, 2.35vw, 2.65rem);
+    }
+
+    .Gifts tbody:empty {
+        min-height: 12.5rem;
+    }
+
+    .Gifts tbody:empty::before {
+        padding-block: 7.6rem 1.35rem;
+        background-position: 50% 3.75rem, 50% 3.75rem, 50% 2.85rem, 50% 2.85rem, 50% 1.15rem, 50% 1.15rem;
+    }
+}
+
+@media (max-width: 48rem) {
+    .Gifts {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.15rem;
+        min-height: 30rem;
+        padding: 1.1rem;
+    }
+
+    .Gifts::before {
+        grid-column: 1;
+        max-width: calc(100% - 3rem);
+        font-size: clamp(1.55rem, 7vw, 2.25rem);
+    }
+
+    .Gifts::after {
+        top: -3rem;
+        right: -3.5rem;
+        width: 9rem;
+    }
+
+    .Gifts select {
+        grid-column: 1;
+        width: 100%;
+    }
+
+    .Gifts table {
+        grid-column: 1;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .Gifts thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+    }
+
+    .Gifts tbody {
+        gap: 0.85rem;
+    }
+
+    .Gifts tbody tr {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 1rem;
+        overflow: hidden;
+        border: 1px solid var(--glass-border, rgba(255, 244, 235, 0.14));
+        border-radius: 1.25rem;
+        background:
+            linear-gradient(145deg, rgba(255, 255, 255, 0.085), transparent 36%),
+            var(--glass, rgba(55, 27, 45, 0.58));
+        box-shadow:
+            0 1.15rem 2.7rem rgba(5, 1, 4, 0.28),
+            inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        -webkit-backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+        backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    }
+
+    .Gifts td {
+        display: grid;
+        gap: 0.22rem;
+        align-content: start;
+        padding: 0.65rem;
+        border: 0;
+    }
+
+    .Gifts td:nth-child(1),
+    .Gifts td:nth-child(2) {
+        grid-column: 1 / -1;
+    }
+
+    .Gifts td::before {
+        color: var(--muted, #cfb9c1);
+        content: "";
+        font-family: var(--font-body, sans-serif);
+        font-size: 0.61rem;
+        font-weight: 850;
+        letter-spacing: 0.145em;
+        line-height: 1.2;
+        text-transform: uppercase;
+    }
+
+    .Gifts td:nth-child(1)::before { content: "Gift"; }
+    .Gifts td:nth-child(2)::before { content: "The details"; }
+    .Gifts td:nth-child(3)::before { content: "Price"; }
+    .Gifts td:nth-child(4)::before { content: "Discount"; }
+
+    .Gifts tbody:empty {
+        min-height: 19rem;
+        border: 1px solid var(--glass-border, rgba(255, 244, 235, 0.14));
+        border-radius: 1.25rem;
+        background:
+            linear-gradient(145deg, rgba(255, 255, 255, 0.075), transparent 40%),
+            var(--glass, rgba(55, 27, 45, 0.58));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        -webkit-backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+        backdrop-filter: var(--glass-filter, blur(24px) saturate(150%));
+    }
+}
+
+@media (max-width: 28rem) {
+    .Gifts {
+        padding: 0.85rem;
+        border-radius: 1.25rem;
+    }
+
+    .Gifts::before {
+        max-width: calc(100% - 1rem);
+        padding-inline-start: 0.7rem;
+    }
+
+    .Gifts tbody tr {
+        padding: 0.72rem;
+    }
+
+    .Gifts td {
+        padding: 0.58rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .Gifts,
+    .Gifts::after,
+    .Gifts select,
+    .Gifts tbody tr {
+        animation: none;
+        transition: none;
+    }
+
+    .Gifts select:hover,
+    .Gifts tbody tr:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-contrast: more) {
+    .Gifts,
+    .Gifts table,
+    .Gifts tbody tr,
+    .Gifts select {
+        border-color: rgba(255, 250, 245, 0.48);
+    }
+
+    .Gifts td,
+    .Gifts tbody:empty::before {
+        color: var(--text, #fffaf5);
+    }
+}
+
+@media (forced-colors: active) {
+    .Gifts,
+    .Gifts table,
+    .Gifts tbody tr,
+    .Gifts tbody:empty,
+    .Gifts select {
+        border: 1px solid CanvasText;
+        color: CanvasText;
+        background: Canvas;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .Gifts::after {
+        display: none;
+    }
+
+    .Gifts::before {
+        border-color: Highlight;
+        color: CanvasText;
+        text-shadow: none;
+    }
+
+    .Gifts th,
+    .Gifts td,
+    .Gifts tbody:empty::before {
+        border-color: CanvasText;
+        color: CanvasText;
+        background: Canvas;
+    }
+
+    .Gifts tbody:empty::before {
+        forced-color-adjust: auto;
+    }
+}

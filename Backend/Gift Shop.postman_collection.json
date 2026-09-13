@@ -1,0 +1,80 @@
+{
+  "info": {
+    "_postman_id": "61201ee8-0d89-459f-bcb8-a2c76f33f1a3",
+    "name": "Gift Shop",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38468134"
+  },
+  "item": [
+    {
+      "name": "Get All Audience",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/audience",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "audience"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Gifts By Audience",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/api/gifts-by-audience/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "gifts-by-audience",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Gift",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"audienceId\": 1,\r\n    \"name\": \"Baby Truck\",\r\n    \"description\": \"A cool baby truck.\",\r\n    \"price\": 32,\r\n    \"discount\": 0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/gifts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "4000",
+          "path": [
+            "api",
+            "gifts"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

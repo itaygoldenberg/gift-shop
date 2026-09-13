@@ -1,0 +1,570 @@
+:root {
+    color-scheme: dark;
+
+    /* Joy Atelier - shared dark gift-boutique palette. */
+    --bg: #10080d;
+    --surface: #2a1522;
+    --text: #fffaf5;
+    --muted: #cfb9c1;
+    --gold: #f3ca78;
+    --rose: #ef7195;
+    --coral: #ff9877;
+    --sage: #8fc4ae;
+
+    /* Liquid-glass contract consumed by every page. */
+    --glass: rgba(55, 27, 45, 0.58);
+    --glass-strong: rgba(35, 17, 29, 0.84);
+    --glass-soft: rgba(255, 255, 255, 0.055);
+    --glass-border: rgba(255, 244, 235, 0.14);
+    --glass-border-hot: rgba(243, 202, 120, 0.34);
+    --glass-filter: blur(24px) saturate(150%);
+
+    --glass-border-gradient: linear-gradient(
+        132deg,
+        rgba(255, 250, 245, 0.3),
+        rgba(255, 250, 245, 0.06) 34%,
+        rgba(243, 202, 120, 0.28) 68%,
+        rgba(239, 113, 149, 0.3)
+    );
+    --glass-specular: linear-gradient(
+        128deg,
+        rgba(255, 255, 255, 0.18),
+        rgba(255, 255, 255, 0.045) 34%,
+        transparent 55%
+    );
+    --glass-highlight:
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 1px 0 0 rgba(255, 255, 255, 0.05),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.24);
+    --glass-shadow:
+        0 1.15rem 3.2rem rgba(4, 1, 3, 0.34),
+        0 0.25rem 0.9rem rgba(4, 1, 3, 0.22),
+        var(--glass-highlight);
+    --glass-shadow-lg:
+        0 1.8rem 5rem rgba(4, 1, 3, 0.46),
+        0 0 3rem rgba(239, 113, 149, 0.08),
+        var(--glass-highlight);
+
+    --radius-sm: 0.72rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.4rem;
+    --radius-xl: 1.9rem;
+    --radius-2xl: 2.5rem;
+    --radius-pill: 999px;
+
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+    --space-8: 4.5rem;
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.34, 1.42, 0.64, 1);
+    --speed-fast: 160ms;
+    --speed-base: 320ms;
+    --speed-slow: 760ms;
+
+    --font-body: Inter, Aptos, "Avenir Next", "Segoe UI", sans-serif;
+    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+
+    /* Compatibility aliases retained for existing page-level CSS. */
+    --accent: var(--gold);
+    --accent-2: var(--rose);
+    --accent-3: var(--coral);
+    --color-background: var(--bg);
+    --color-surface: var(--surface);
+    --color-surface-soft: #1b0d16;
+    --color-surface-strong: #422239;
+    --color-ink: var(--text);
+    --color-muted: var(--muted);
+    --color-accent: var(--gold);
+    --color-accent-hover: #ffe4a6;
+    --color-accent-secondary: var(--rose);
+    --color-accent-secondary-soft: rgba(239, 113, 149, 0.16);
+    --color-accent-violet: #d99ac8;
+    --color-accent-aqua: var(--sage);
+    --color-border: rgba(255, 244, 235, 0.1);
+    --color-border-strong: rgba(255, 244, 235, 0.2);
+
+    --glass-surface: var(--glass);
+    --glass-surface-strong: var(--glass-strong);
+    --glass-surface-soft: var(--glass-soft);
+    --glass-surface-tint: rgba(77, 36, 59, 0.6);
+    --glass-border-bright: rgba(255, 244, 235, 0.26);
+    --glass-border-shadow: rgba(0, 0, 0, 0.44);
+    --glass-highlight-color: rgba(255, 255, 255, 0.16);
+    --glass-shadow-sm:
+        0 0.7rem 1.8rem rgba(4, 1, 3, 0.26),
+        var(--glass-highlight);
+    --glass-shadow-md: var(--glass-shadow);
+    --glass-blur: var(--glass-filter);
+    --glass-blur-strong: blur(34px) saturate(165%);
+    --glass-saturate: saturate(150%);
+
+    --glow-rose: rgba(239, 113, 149, 0.22);
+    --glow-violet: rgba(217, 154, 200, 0.18);
+    --glow-gold: rgba(243, 202, 120, 0.2);
+    --glow-aqua: rgba(143, 196, 174, 0.17);
+
+    --shadow-sm: var(--glass-shadow-sm);
+    --shadow-md: var(--glass-shadow);
+    --shadow-lg: var(--glass-shadow-lg);
+    --shadow-focus:
+        0 0 0 0.2rem rgba(16, 8, 13, 0.92),
+        0 0 0 0.36rem rgba(243, 202, 120, 0.76),
+        0 0 1.4rem rgba(239, 113, 149, 0.18);
+
+    --ease-fluid: var(--ease-out);
+    --ease-silk: var(--ease-out);
+    --transition-fast: var(--speed-fast) var(--ease-out);
+    --transition-base: var(--speed-base) var(--ease-out);
+    --transition-slow: var(--speed-slow) var(--ease-out);
+    --transition-spring: 480ms var(--ease-spring);
+
+    color: var(--text);
+    background: var(--bg);
+    font-family: var(--font-body);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 20rem;
+    min-height: 100%;
+    color: var(--text);
+    background: var(--bg);
+    scroll-behavior: smooth;
+    scrollbar-color: rgba(239, 113, 149, 0.65) rgba(24, 11, 19, 0.92);
+    scrollbar-gutter: stable;
+}
+
+body {
+    position: relative;
+    min-width: 20rem;
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    overflow-x: hidden;
+    isolation: isolate;
+    color: var(--text);
+    background:
+        radial-gradient(ellipse 38rem 24rem at 12% -4%, rgba(239, 113, 149, 0.14), transparent 68%),
+        radial-gradient(ellipse 34rem 22rem at 92% 12%, rgba(243, 202, 120, 0.09), transparent 70%),
+        radial-gradient(ellipse 42rem 25rem at 62% 104%, rgba(255, 152, 119, 0.08), transparent 72%),
+        linear-gradient(145deg, #0d060a 0%, var(--bg) 42%, #190c14 73%, #0c0609 100%);
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 0.25vw + 0.9rem, 1.04rem);
+    line-height: 1.62;
+    text-wrap: pretty;
+    -webkit-tap-highlight-color: rgba(239, 113, 149, 0.18);
+}
+
+@supports (overflow: clip) {
+    body {
+        overflow-x: clip;
+    }
+}
+
+/* A quiet wrapping-paper weave keeps the canvas alive without decorative blobs. */
+body::before {
+    position: fixed;
+    z-index: -2;
+    inset: 0;
+    background:
+        linear-gradient(118deg, transparent 0 49.55%, rgba(243, 202, 120, 0.035) 49.6% 50.4%, transparent 50.45%),
+        linear-gradient(28deg, transparent 0 49.65%, rgba(239, 113, 149, 0.026) 49.7% 50.3%, transparent 50.35%);
+    background-position: 0 0, 1.8rem 1.8rem;
+    background-size: 4.5rem 4.5rem;
+    content: "";
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 76%);
+    mask-image: linear-gradient(to bottom, black, transparent 76%);
+    animation: joy-wrap-drift 36s linear infinite;
+}
+
+body::after {
+    position: fixed;
+    z-index: -1;
+    inset: 0;
+    background: linear-gradient(112deg, transparent 22%, rgba(255, 255, 255, 0.016) 38%, transparent 52%);
+    content: "";
+    pointer-events: none;
+}
+
+#root {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+    isolation: isolate;
+}
+
+::selection {
+    color: #2a101b;
+    background: var(--gold);
+    text-shadow: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+    margin-block-start: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: var(--text);
+    font-family: var(--font-display);
+    font-weight: 650;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+}
+
+p {
+    color: var(--muted);
+}
+
+a {
+    color: inherit;
+    text-decoration-color: rgba(243, 202, 120, 0.55);
+    text-decoration-thickness: 0.09em;
+    text-underline-offset: 0.22em;
+    transition:
+        color var(--transition-fast),
+        text-decoration-color var(--transition-fast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    a:hover {
+        text-decoration-color: currentColor;
+    }
+}
+
+img,
+picture,
+svg,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+img,
+svg {
+    height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+    max-width: 100%;
+    color: inherit;
+    font: inherit;
+}
+
+button,
+select {
+    cursor: pointer;
+}
+
+button {
+    border: 0;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input,
+select,
+textarea {
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    outline: 0;
+    color: var(--text);
+    background:
+        var(--glass-specular),
+        var(--glass-strong);
+    caret-color: var(--rose);
+    accent-color: var(--rose);
+    box-shadow: var(--glass-shadow-sm);
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    backdrop-filter: blur(18px) saturate(145%);
+    transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-base),
+        background-color var(--transition-fast),
+        transform var(--transition-spring);
+}
+
+option,
+optgroup {
+    color: var(--text);
+    background: #25121e;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    input:hover,
+    select:hover,
+    textarea:hover {
+        border-color: var(--glass-border-hot);
+        box-shadow:
+            var(--glass-shadow-sm),
+            0 0 1.4rem rgba(243, 202, 120, 0.07);
+    }
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--gold);
+    box-shadow: var(--shadow-focus);
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: rgba(207, 185, 193, 0.68);
+    opacity: 1;
+}
+
+:focus-visible {
+    border-radius: max(0.25rem, var(--radius-sm));
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 0;
+}
+
+:disabled,
+[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+    filter: saturate(0.5);
+}
+
+::-webkit-scrollbar {
+    width: 0.72rem;
+    height: 0.72rem;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(24, 11, 19, 0.96);
+}
+
+::-webkit-scrollbar-thumb {
+    border: 3px solid rgba(24, 11, 19, 0.96);
+    border-radius: var(--radius-pill);
+    background: linear-gradient(180deg, var(--rose), var(--coral));
+}
+
+/* Toasts share the boutique glass instead of looking like browser alerts. */
+body .iziToast,
+body .iziToast.iziToast-color-red,
+body .iziToast.iziToast-color-green {
+    overflow: hidden;
+    border: 1px solid var(--glass-border-hot) !important;
+    border-radius: var(--radius-lg) !important;
+    color: var(--text) !important;
+    background:
+        var(--glass-specular),
+        linear-gradient(120deg, rgba(42, 21, 34, 0.96), rgba(61, 27, 48, 0.93)) !important;
+    box-shadow:
+        var(--glass-shadow),
+        0 0 2rem rgba(239, 113, 149, 0.11) !important;
+    -webkit-backdrop-filter: var(--glass-filter);
+    backdrop-filter: var(--glass-filter);
+}
+
+body .iziToast > .iziToast-body .iziToast-title,
+body .iziToast > .iziToast-body .iziToast-message {
+    color: var(--text) !important;
+    text-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.42);
+}
+
+body .iziToast > .iziToast-body .iziToast-title {
+    color: var(--gold) !important;
+}
+
+body .iziToast > .iziToast-close {
+    filter: invert(1);
+    opacity: 0.75;
+}
+
+body .iziToast.iziToast-color-red {
+    border-color: rgba(255, 152, 119, 0.48) !important;
+}
+
+@keyframes joy-wrap-drift {
+    to {
+        background-position: 4.5rem 4.5rem, 6.3rem 6.3rem;
+    }
+}
+
+/* Animation names retained because page styles use them. Content stays visible. */
+@keyframes liquid-reveal {
+    from {
+        transform: translateY(0.65rem) scale(0.99);
+    }
+}
+
+@keyframes liquid-float {
+    0%,
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    50% {
+        transform: translate3d(0, -0.42rem, 0);
+    }
+}
+
+@keyframes liquid-shimmer {
+    from {
+        background-position: 180% 0;
+    }
+
+    to {
+        background-position: -80% 0;
+    }
+}
+
+@keyframes liquid-pulse {
+    0%,
+    100% {
+        transform: scale(0.97);
+    }
+
+    50% {
+        transform: scale(1.035);
+    }
+}
+
+@media (max-width: 42rem) {
+    :root {
+        --radius-xl: 1.55rem;
+        --radius-2xl: 2rem;
+        --space-7: 2.25rem;
+        --space-8: 3.25rem;
+        --glass-filter: blur(19px) saturate(145%);
+        --glass-blur-strong: blur(27px) saturate(155%);
+    }
+
+    body {
+        line-height: 1.56;
+    }
+
+    body::before {
+        animation: none;
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --muted: #f2dde4;
+        --glass: rgba(35, 17, 29, 0.93);
+        --glass-strong: rgba(24, 11, 20, 0.98);
+        --glass-border: rgba(255, 244, 235, 0.4);
+        --glass-border-hot: rgba(243, 202, 120, 0.75);
+        --color-border: rgba(255, 255, 255, 0.34);
+        --color-border-strong: rgba(255, 255, 255, 0.52);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
+    }
+}
+
+@media (forced-colors: active) {
+    :root {
+        --bg: Canvas;
+        --surface: Canvas;
+        --text: CanvasText;
+        --muted: CanvasText;
+        --gold: Highlight;
+        --rose: Highlight;
+        --coral: Highlight;
+        --sage: Highlight;
+        --accent: Highlight;
+        --accent-2: Highlight;
+        --accent-3: Highlight;
+        --glass: Canvas;
+        --glass-strong: Canvas;
+        --glass-soft: Canvas;
+        --glass-border: CanvasText;
+        --glass-border-hot: Highlight;
+        --color-background: Canvas;
+        --color-surface: Canvas;
+        --color-surface-soft: Canvas;
+        --color-surface-strong: Canvas;
+        --color-ink: CanvasText;
+        --color-muted: CanvasText;
+        --color-accent: Highlight;
+        --color-border: CanvasText;
+        --color-border-strong: CanvasText;
+    }
+
+    body {
+        background: Canvas;
+    }
+
+    body::before,
+    body::after {
+        display: none;
+    }
+
+    input,
+    select,
+    textarea {
+        border-color: CanvasText;
+        color: FieldText;
+        background: Field;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        forced-color-adjust: auto;
+    }
+
+    body .iziToast,
+    body .iziToast.iziToast-color-red,
+    body .iziToast.iziToast-color-green {
+        border-color: CanvasText !important;
+        color: CanvasText !important;
+        background: Canvas !important;
+        box-shadow: none !important;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
