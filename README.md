@@ -1,145 +1,175 @@
 <p align="center">
-  <img src="./docs/readme-banner.svg" alt="Gift Shop animated project banner" width="100%" />
+  <img src="./docs/readme-banner.svg" alt="Gift Shop project banner" width="100%" />
 </p>
 
 <p align="center">
-  <a href="#running-it"><img src="./docs/actions/run.svg" alt="Run Gift Shop locally" width="250" /></a>
-  <a href="https://github.com/itaygoldenberg/gift-shop"><img src="./docs/actions/source.svg" alt="View the Gift Shop source" width="250" /></a>
-  <a href="https://github.com/itaygoldenberg?tab=repositories"><img src="./docs/actions/github.svg" alt="More projects by Itay Goldenberg" width="250" /></a>
-  <a href="https://www.linkedin.com/in/itay-goldenberg/"><img src="./docs/actions/linkedin.svg" alt="Connect with Itay Goldenberg on LinkedIn" width="250" /></a>
+  <a href="#running-locally"><img src="./docs/actions/run.svg" alt="Run locally" width="250" /></a>
+  <a href="https://github.com/itaygoldenberg/gift-shop"><img src="./docs/actions/source.svg" alt="View source" width="250" /></a>
+  <a href="https://github.com/itaygoldenberg?tab=repositories"><img src="./docs/actions/github.svg" alt="More projects" width="250" /></a>
+  <a href="https://www.linkedin.com/in/itay-goldenberg/"><img src="./docs/actions/linkedin.svg" alt="LinkedIn" width="250" /></a>
 </p>
-
-> [!NOTE]
-> A full-stack course project: a typed React client, an Express REST API and a MySQL database, packaged so the whole system starts with one command.
 
 <p align="center">
   <a href="#overview">Overview</a>&nbsp;&middot;&nbsp;
   <a href="#features">Features</a>&nbsp;&middot;&nbsp;
+  <a href="#workflow">Workflow</a>&nbsp;&middot;&nbsp;
   <a href="#technology">Technology</a>&nbsp;&middot;&nbsp;
-  <a href="#project-structure">Project structure</a>&nbsp;&middot;&nbsp;
-  <a href="#running-it">Running it</a>&nbsp;&middot;&nbsp;
-  <a href="#notes">Notes</a>
+  <a href="#running-locally">Running locally</a>
 </p>
+
+> [!NOTE]
+> A full-stack course portfolio project by Itay Goldenberg. Browse gifts by audience, add a gift, and persist it in MySQL.
 
 ## Overview
 
-Gift Shop is a commerce catalogue built as three cooperating parts. The client is a typed React SPA with Redux state and MUI components. The API is a layered Express service with its own controllers, services and data-access layer. The database is MySQL, seeded from a dump in the repository.
+Gift Shop is a React catalogue backed by an Express API and a MySQL database. Visitors select an audience to browse matching gifts, while the add-gift form sends a validated record to the backend.
 
-What ties them together is `compose.yaml`: the three run as containers on a private network, where each service reaches the others by name rather than by address. Nothing has to be installed on the host but Docker.
+The repository demonstrates a complete read-and-create path: component, HTTP service, controller, business service and parameterized SQL. Docker Compose connects the three runtime services.
+
+<table><tr><td align="center" width="25%"><strong>REACT</strong><br /><sub>catalogue and forms</sub></td><td align="center" width="25%"><strong>EXPRESS</strong><br /><sub>three API routes</sub></td><td align="center" width="25%"><strong>MYSQL</strong><br /><sub>persistent gifts</sub></td><td align="center" width="25%"><strong>DOCKER</strong><br /><sub>three services</sub></td></tr></table>
 
 | Project detail | Implementation |
 |---|---|
-| Frontend | React, TypeScript, Redux Toolkit and MUI |
-| Backend | Express REST API written in TypeScript |
-| Data | MySQL, seeded from `Database/giftshop.sql` |
-| Security | JWT roles, hashing with a private salt, Helmet, rate limiting, XSS stripping, reCAPTCHA |
-| Validation | Zod schemas on the model layer |
-| Images | Multipart upload, stored server-side and served back by name |
-| Containers | Three-service Docker Compose stack |
+| React + TypeScript | Catalogue, routing and typed forms |
+| Express + Zod | HTTP routes and server-side gift validation |
+| mysql2 + MySQL | Parameterized queries and persistence |
+| Vite + Docker Compose | Client tooling and local multi-service startup |
 
 ## Contents
 
 - [Overview](#overview)
 - [Features](#features)
+- [Workflow](#workflow)
 - [Technology](#technology)
 - [Project structure](#project-structure)
-- [Running it](#running-it)
-- [Notes](#notes)
+- [Running locally](#running-locally)
+- [Running with Docker](#running-with-docker)
+- [Checks](#checks)
+- [Additional details](#additional-details)
+- [Operational notes](#operational-notes)
+- [Author](#author)
 
 ## Features
 
-### Catalogue workflows
+### Audience-based catalogue
 
-Products can be listed, created, edited and deleted, each with an image. The forms are validated before anything is sent, and again on the server before anything reaches the database.
+The client requests the audience list, then fetches gifts for the selected audience ID.
 
-### Authentication and authorization
+### Validated gift creation
 
-Passwords are hashed with an HMAC and a private salt. A JWT carries the role, and the client attaches it through an Axios interceptor rather than at every call site. Write operations require a signed-in user; deletion requires an administrator.
+The add-gift route constructs a GiftModel and validates audience, name, description, price and discount with Zod before inserting the row.
 
-### Layered API
+### Parameterized database access
 
-A request passes through a controller, a service and a data-access layer, and each one has a single job. Prepared statements keep SQL out of the request.
+The service supplies SQL parameters separately from its queries and returns the newly assigned ID to the client.
 
-### Validation in one place
+### Containerized development
 
-Zod describes what a valid product looks like. The same schema rejects a bad request and documents the shape, so the rules live in one file instead of being repeated in every route.
+Compose builds the client and API and starts MySQL 8 with an initialization directory and a named data volume.
 
-### One command to run
+## Workflow
 
-The client, the API and the database are declared in `compose.yaml` and start together. The service name is the hostname on the private network, which is why the API reaches the database at `mysql-service` and not at `localhost`.
+<p align="center">
+  <img src="./docs/workflow.svg" alt="REACT CLIENT → EXPRESS API → MYSQL → CATALOGUE" width="100%" />
+</p>
+
+1. **REACT CLIENT:** Select an audience or submit a gift.
+2. **EXPRESS API:** Route the request to DataService.
+3. **MYSQL:** Read matching rows or insert a gift.
+4. **CATALOGUE:** Render typed records and creation feedback.
 
 ## Technology
 
 <p align="center">
-  <img src="./docs/tech-strip.svg" alt="Gift Shop technologies" width="100%" />
+  <img src="./docs/tech-strip.svg" alt="Gift Shop technology stack" width="100%" />
 </p>
 
 | Technology | Role |
 |---|---|
-| React + TypeScript | Typed single page application |
-| Redux Toolkit | Global state for products and the signed-in user |
-| MUI + Emotion | Component library and theming |
-| Axios | HTTP client, with an interceptor that attaches the token |
-| Node.js + Express | REST API runtime |
-| MySQL + mysql2 | Relational persistence with prepared statements |
-| JWT | Authentication and role-aware routes |
-| Zod | Model validation |
-| Helmet, rate limit, striptags | Response headers, request throttling and XSS stripping |
-| Docker Compose | Three-service local stack |
+| React + TypeScript | Catalogue, routing and typed forms |
+| Express + Zod | HTTP routes and server-side gift validation |
+| mysql2 + MySQL | Parameterized queries and persistence |
+| Vite + Docker Compose | Client tooling and local multi-service startup |
 
 ## Project structure
 
 ```text
-Gift Shop/
-|-- Backend/                  Express and TypeScript API
-|   |-- src/controllers/      HTTP routes
-|   |-- src/services/         business logic and data access
-|   |-- src/middleware/       security and error handling
-|   |-- src/models/           typed contracts and Zod schemas
-|   |-- Dockerfile            API image
-|   `-- .dockerignore         keeps .env and node_modules out of the image
-|-- Frontend/                 React and TypeScript SPA
-|   `-- Dockerfile            client image
-|-- Database/
-|   `-- giftshop.sql          schema and seed data
-|-- docs/                     README artwork only
-`-- compose.yaml              the three services
+Backend/src/       controllers, services, models and database access
+Frontend/src/      React pages, forms and HTTP services
+Database/          SQL initialization files
+compose.yaml       MySQL, backend and frontend services
+docs/              README artwork
 ```
 
-## Running it
+## Running locally
+
+Clone the repository, then follow the application-specific steps below. Commands assume the repository root unless a directory change is shown.
 
 ```bash
-docker compose up -d --build
+git clone https://github.com/itaygoldenberg/gift-shop.git
+cd gift-shop
 ```
 
-The client is served on `http://localhost:5173` and the API on `http://localhost:4000`.
-
-The database image runs every script in its initialisation folder, but only on the first start, while the data volume is still empty. To reload the seed data after changing the dump:
-
-```bash
-docker compose down -v
-```
-
-## Environment
-
-Copy `.env.example` to `.env` and fill in your own values:
+Use Node.js 24 and a local MySQL instance. Import the SQL file under `Database/` into a `giftshop` database. Create `Backend/.env` (no example file is currently included):
 
 ```env
-MYSQL_HOST=localhost
+ENVIRONMENT=development
+MYSQL_HOST=127.0.0.1
 MYSQL_USER=your_mysql_user
 MYSQL_PASSWORD=your_mysql_password
 MYSQL_DATABASE=giftshop
-JWT_SECRET=replace_with_a_long_random_secret
-HASH_SALT=replace_with_a_private_salt
 ```
 
-`.env` is ignored by git. A key that reaches GitHub is public from the moment it is pushed.
+Start the API in one terminal:
 
-## Notes
+```bash
+cd Backend
+npm install
+npm start
+```
 
-- `Backend/.env` is not copied into the image. Compose mounts it read-only at run time, and the container-specific values in `compose.yaml` take precedence, because `dotenv` does not overwrite a variable that already exists in the environment.
-- Changing `HASH_SALT` invalidates every password already stored. Set it once and leave it.
-- Review CORS, uploads, rate limits and database privileges before exposing this beyond a local machine.
+Start the client in a second terminal, starting from the repository root:
+
+```bash
+cd Frontend
+```
+
+```bash
+npm install
+npm run dev
+```
+
+Open the local address printed by Vite. The API listens on port 4000. The client defaults to `http://localhost:4000`; `Frontend/.env` can override it with `VITE_SERVER_URL`.
+
+## Running with Docker
+
+Create `Backend/.env` as above and create `Frontend/.env` containing `VITE_SERVER_URL=http://localhost:4000` before starting: both files are bind-mounted by Compose. From the repository root:
+
+```bash
+docker compose up --build -d
+docker compose ps
+docker compose logs backend-service
+```
+
+Open **http://localhost** (host port 80); the API is on **http://localhost:4000**. Compose overrides the database connection values for its internal MySQL service. SQL initialization runs when the database volume is first created. Stop with `docker compose down`; the named volume retains data.
+
+## Checks
+
+In `Frontend`, run `npm run build`. With the API and database running, select an audience, add a valid gift, then return to that audience and verify the new record. Submit invalid data to verify validation. The backend has no build or test script.
+
+These are available build commands and suggested manual checks, not a claim that a full integration test suite is included.
+
+## Additional details
+
+| Method | Route | Result |
+|---|---|---|
+| GET | `/api/audience` | Audience records |
+| GET | `/api/gifts-by-audience/:audienceId` | Matching gifts |
+| POST | `/api/gifts` | Created gift with its ID |
+
+## Operational notes
+
+The Compose file contains development database credentials and runs Vite rather than a production static server. It does not define a database readiness healthcheck. Authentication helpers exist in the source, but the three catalogue routes are not an implemented login or checkout system.
 
 ## Author
 
@@ -150,5 +180,5 @@ HASH_SALT=replace_with_a_private_salt
 
 <p align="center">
   <a href="https://github.com/itaygoldenberg"><img src="./docs/actions/github.svg" alt="Itay Goldenberg on GitHub" width="250" /></a>
-  <a href="https://www.linkedin.com/in/itay-goldenberg/"><img src="./docs/actions/linkedin.svg" alt="Itay Goldenberg on LinkedIn" width="250" /></a>
+  <a href="https://www.linkedin.com/in/itay-goldenberg/"><img src="./docs/actions/linkedin.svg" alt="Connect on LinkedIn" width="250" /></a>
 </p>
